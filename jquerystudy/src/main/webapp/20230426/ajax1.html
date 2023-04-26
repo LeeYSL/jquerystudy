@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>XMLHttpReauest 객체</title>
+<script type="text/javascript">
+   function loadJsp() {
+	   /*
+	    new XMLHttpRequest() : ajax이랑 통신 할 수 있게 하는 객체
+	                           서버에 요청 할 수 있는 자바스크립트 객체
+	                           
+	    ajax을 통하면 페이지 소스 보기에서는 안 보인다? 개발자 환경에서 봐야됨                      
+	   
+	   */
+	   const xhttp = new XMLHttpRequest() //readyStat :0 인 상태
+	   // xhttp.open : 요청하기 전 준비
+	   // 요청 방식 : (GET 방식 or post 방식)
+	   // 요청 url : test1.jsp
+	   xhttp.open("GET","test1.jsp") // readyStat :1인 상태
+	   //xhttp.send() : 서버로 해당 url을 요청
+	   xhttp.send()// readyStat :2인 상태
+	   //onreadystatechange : 콜백 함수 등록 변수
+	   //onreadystatechange : xhttp 객체의 상태가 변경 시 자동 호출 되는 함수 => 콜백함수
+	   xhttp.onreadystatechange=function(){
+		   /*
+		      readyStat : ajax 객체의 상태
+		         0   : 객체를 생성
+		         1   : open() 실행
+		         2   : send() 실행. 서버요청상태. 서버 응답이 없응ㅁ
+		         3   : 서버 응답 중. 일부 응답 중
+		         4   : 서버 응답 완료
+		         
+		       status : 응답 결과. HTTP 응답 코드
+		         
+		         200 : 정상응답
+		         404 : 해당페이지 없음
+		         500 : 해당페이지 오류
+		       
+		         
+		   */
+		   if(this.readyState==4 && this.status==200) { //readyState==4  : 서버에서 응답 다 받았는지 확인 
+			   //정상 응답 완료인 경우
+			   //responseText : 서버에서 응답 메세지
+			   alert(this.responseText)
+			   document.querySelector("#demo").innerHTML=this.responseText 
+		   }
+	   }
+	
+}
+
+</script>
+</head>
+<body>
+<h2>XMLHttpRequest 객체</h2>
+<button type="button" onclick="loadJsp()">요청</button>
+<div id="demo"></div></body></html>

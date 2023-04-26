@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이벤트 발생한 객체의 위치값</title>
+<style type="text/css">
+   table {
+	  border-spacing: 0px;
+	  border-collapse: collapse;
+}
+  .hover {background: green; color:yellow;}
+  .reverse {background: bluel; color:white;}
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript">
+ $(function(){
+	 //.hover : th태그에 마우스 커서가 들엉오면 발생
+   $("th").hover(function() { 
+	   //$(this) : 이벤트가 발생한 th 태그 한 개
+	   //$(this).parent() : 이벤트가 발생한 th 태그의 tr 태그
+	   //$(this).parent().childer() : 이벤트가 발생한 th 태그의 tr 태그의 모든 하위 태그(th 태그들)
+	   
+	   //$(thi s)..parent().children().index(this) : 
+	   // th 태그들 중 this의 인덱스 값 리턴
+	   select = $(this).parent().children().index(this) + 1;
+	   console.log(select)
+	   $(this).addClass("hover");
+	   //select : 1 => td:nth-child(5n1")"
+	   //td 태그 중 select인 모든 td 태그의 class 속성을 hover 추가
+	   $("td:nth-child("+select+")").addClass("hover");
+   },function(){ //th 태그에 마우스 커서가 외부로 나갈 때
+	   $(this).removeClass("hover");
+	   $("td:nth-child("+select+")").removeClass("hover");
+   })
+})
+
+</script></head><body>
+<table border="1">
+<tr><th>이름</th><th>A</th><th>서울</th><th>여</th><th>1234</th></tr>
+<tr><td>이름1</td><td>B</td><td>경기</td><td>여</td><td>1234</td></tr>
+<tr><td>이름2</td><td>O</td><td>대만</td><td>여</td><td>1234</td></tr>
+<tr><td>이름3</td><td>AB</td><td>미국</td><td>여</td><td>1234</td></tr>
+<tr><td>이름4</td><td>B</td><td>제주도</td><td>여</td><td>1234</td></tr>
+<tr><td>이름5</td><td>A</td><td>일본</td><td>여</td><td>1234</td></tr>
+</table>
+</body>
+</html>

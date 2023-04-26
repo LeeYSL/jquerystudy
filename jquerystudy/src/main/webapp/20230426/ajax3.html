@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>json 읽기</title>
+<script type="text/javascript">
+   function load(url) {
+	   const xhttp = new XMLHttpRequest()
+	   xhttp.open("GET",url)
+	   xhttp.send()
+	   xhttp.onreadystatechange=callBack
+}
+function callBack() {
+	if(this.readyState ==4 && this.status == 200) {
+		let area = document.querySelector("#area") //div 태그 값
+		/*
+		
+		-responseText :
+			[] : 배열 
+		[ {"author":{"book":"ajax","pubDate":"2023-04-26"}},
+          {"author":{"book":"자바","pubDate":"2023-02-01"}},
+          {"author":{"book":"웹","pubDate":"2023-03-20"}} 
+        ] 
+		
+		  Json.parse(문자열) json 객체로 전달 해줌
+		  data : json 객체, 배열의 형태
+		*/
+		let data = JSON.parse(this.responseText) //json 객체로 처리해준다.
+		
+		/* s : {"author":{"book":"ajax","pubDate":"2023-04-26"}}
+		   s.author : {"book":"ajax","pubDate":"2023-04-26"}
+		   s.author.book : ajax
+		   s.author.book.pubDate :2023-04-26
+		
+		*/
+		for(s of data) {  
+			area.innerHTML += '<p>'+s.author.book+","+s.author.pubDate+'</p>'
+		}
+	}
+	
+}
+</script>
+</head>
+<body>
+<input type="button" value="json읽기" onclick="load('test.json')">
+<div id="area"></div>
+</body>
+</html>

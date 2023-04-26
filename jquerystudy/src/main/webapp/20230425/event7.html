@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>key event 예제</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript">
+ $(function(){
+	let num1 = $("h1").text(); //100. h1의 내용 값
+	/*
+	   keyup : key 이벤트 관련 함수
+	           key가 눌렸다가 올라올 때 발생 되는 이벤트 함수
+	           
+	   keydown : key가 눌려질 때 발생되는 이벤트
+	   keypress : 거의 사용 하지 않음
+	*/
+	$("textarea").keyup(function(){
+		// $("textarea").val().length : 입력 된 문자열의 길이
+		//num2 : 100-입력 된 길이. 쓰기 가능한 문자 갯수
+		let num2 = num1 - $("textarea").val().length;
+		$("#remainnum").html(num2);
+		//음수 :100개의 문자 이상 쓰여진 갯수 
+		if(num2 < 0) $("h1").css("color","red"); // 음수는 빨강색 표시
+		else         $("h1").css("color","black"); //양수는 검정색으로 표시
+	})
+	 
+ })
+</script>
+</head>
+<body>
+<p>글쓰기</p><h1 id="remainnum">100</h1>
+<textarea rows="10" cols="70"></textarea>
+</body>
+</html>
