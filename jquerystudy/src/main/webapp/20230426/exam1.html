@@ -11,11 +11,10 @@
 <script type="text/javascript" src="../js/ajax.js"></script>
 <script type="text/javascript">
   window.onload = function() {
-	  ajax("examtest.jsp",null,getMax,"GET")
-	
+	  ajax("examtest.jsp",null,getMax,"GET") //세번째 변수를 callback로 인식해줌	
 }
   function getMax() {
-	  if(this.readyState==4 && this.status ==200) {
+	  if(this.readyState==4 && this.status ==200) { 
 		  console.log(this.responseText)
 		  const nums = this.responseText.split(",")
 		  let max = parseInt(nums[0].trim()) //첫번째 요소 최대값
