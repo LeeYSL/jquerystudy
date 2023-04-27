@@ -13,7 +13,7 @@
 </sql:query>
 <c:if test="${! empty rs.rows}">
  <h1 id="result" class="find" style="color:red;">존재하는 아이디 입니다.</h1>
-</c:if>
+</c:if> <!--  id속성을 유일해야 되지만 하나만 내려가기 때문에 괜찮음? -->
 <c:if test="${empty rs.rows}">
   <h1 id="result" class="notfound">회원 가입이 가능한 아이디 입니다.</h1>
 </c:if>
